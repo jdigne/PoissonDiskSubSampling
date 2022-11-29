@@ -289,7 +289,8 @@ void FileIO::saveContent(OctreeNode* node, ofstream& f,unsigned int &ncover)
 		{
 		  if(iter->isSelected())
 		    f << std::fixed << std::setprecision(8)
-          << iter->x()<<"\t"<<iter->y()<<"\t"<<iter->z()<<std::endl;
+          << iter->x() << "\t" << iter->y() << "\t" << iter->z() << "\t"
+          << iter->nx() << "\t" << iter->ny() << "\t" << iter->nz()<<std::endl;
         ncover +=iter->getNCovered();
 		}
 	}

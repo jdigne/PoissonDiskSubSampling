@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
   int radius_flag = -1;
   int infile_flag = -1;
   int outfile_flag = -1;
-  int ascii_flag = -1;
+  int off_flag = -1;
   
   while( (c = getopt(argc,argv, "i:o:r:a")) != -1)
   {
@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
       }
       case 'a':
       {
-        ascii_flag = 1;
+        off_flag = 1;
         break;
       }
     }    
@@ -140,9 +140,8 @@ int main(int argc, char **argv) {
   std::cout<<"Selecting the points took "<<difftime(end,start)<<" s."<<std::endl;
 
   std::string output = outfile;
-  if(ascii_flag == -1)
+  if(off_flag == 1)
   {
-    output.append("_seeds.off");
     if(! FileIO::savePointsOFF(output.c_str(), octree, selection.getNSelected()))
     {
         std::cerr<<"Pb saving the seeds (OFF); exiting."<<std::endl;
@@ -151,7 +150,6 @@ int main(int argc, char **argv) {
   }
   else
   {
-    output.append("_seeds.asc");
     if(! FileIO::savePoints(output.c_str(), octree))
     {
         std::cerr<<"Pb saving the seeds (ASCII); exiting."<<std::endl;
